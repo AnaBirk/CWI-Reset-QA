@@ -13,7 +13,6 @@
         <maven.compiler.target>8</maven.compiler.target>
         <junit.version>4.12</junit.version>
         <selenium-java.version>3.141.59</selenium-java.version>
-
     </properties>
 
 
@@ -22,7 +21,6 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>${junit.version}</version>
-            <scope>test</scope>
         </dependency>
 
         <dependency>
@@ -47,6 +45,5 @@
         </plugins>
 
     </build>
-
 
 </project>
