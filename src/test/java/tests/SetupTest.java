@@ -1,18 +1,21 @@
 package tests;
 
+import org.hamcrest.CoreMatchers;
+import org.junit.Assert;
 import org.junit.Test;
-import org.openqa.selenium.By;
 import pageObjects.HomePage;
 import pageObjects.LoginPage;
+import pageObjects.ProductPage;
+import pageObjects.SearchPage;
 import utils.Browser;
 import utils.utils;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class SetupTest extends Base{
-        @Test
+
         public void testOpeningBrowserAndLoadPage(){
-            //assertTrue(Browser.getCurrentDriver().getCurrentUrl().contains(utils.getBaseUrl()));
+            assertTrue(Browser.getCurrentDriver().getCurrentUrl().contains(utils.getBaseUrl()));
             System.out.println("Funcionou!");
         }
 
@@ -40,4 +43,57 @@ public class SetupTest extends Base{
             System.out.println("Validou a conta no site");
 
         }
+
+        @Test
+         public void testeSearch(){
+
+            String quest = "DRESS";
+            String questResultQtd = "7 results have been found.";
+            //iniciar as páginas
+            HomePage home = new HomePage();
+            SearchPage search = new SearchPage();
+
+            //Fazer a pesquisa
+            home.doSearch(quest);
+
+            //Validar a pesquisa
+            assertTrue(search.isSearchPage());
+            assertEquals(search.getTextLighter().replace("\"", ""), quest);
+            assertThat(search.getTextHeadingCounter(), CoreMatchers.containsString(questResultQtd));
+
+        }
+
+        @Test
+         public void testeAddProductToProductPage(){
+            //Acessar a categoria dress
+            testeSearch();
+
+            //Iniciar as páginas
+            SearchPage category = new SearchPage();
+            ProductPage product = new ProductPage();
+            //salva o nome do produto na página de search
+            String nameProductCategory = category.getProductNameCategory();
+
+            //Click em More e direcionar a direcionar para a página de produto
+            category.clickProductAddToProductPage();
+
+            //Verificar se produto está na página de detalhes correta
+           assertTrue(product.getProductNamePDP().equals(nameProductCategory));
+        }
+
+        @Test
+         public void testeAddProductToCart(){
+            //acessar a página de produto
+            testeAddProductToProductPage();
+            //iniciar as páginas
+            ProductPage product = new ProductPage();
+            //vou usar para válidar o nome no carrinho
+            String nomeProductPDP = product.getProductNamePDP();
+
+
+
+        }
+
     }
+
+
