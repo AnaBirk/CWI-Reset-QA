@@ -11,7 +11,7 @@ public class HomePageElementMapper {
     public WebElement login;
 
     //Input onde digita o produto que deseja adicionar
-   //@FindBy(id = "search_query_top")
+    @FindBy(id = "search_query_top")
     public WebElement search_query_top;
 
     //Botão de pesquisa

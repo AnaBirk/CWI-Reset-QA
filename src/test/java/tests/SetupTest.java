@@ -3,10 +3,7 @@ package tests;
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.Test;
-import pageObjects.HomePage;
-import pageObjects.LoginPage;
-import pageObjects.ProductPage;
-import pageObjects.SearchPage;
+import pageObjects.*;
 import utils.Browser;
 import utils.utils;
 
@@ -19,6 +16,15 @@ public class SetupTest extends Base{
             System.out.println("Funcionou!");
         }
 
+        //Variáveis Utilizadas nos testes
+        String fristNameValue = "Ana Caroline";
+        String lastNameValue = "Birk";
+        String fullName = fristNameValue.concat(" " + lastNameValue);
+        String emailValue = "anabirkkkkktestefinal@gmail.com";
+        String emailValueAccount = emailValue;
+        String textCreateAnAccount = "Create an account";
+        String accountCreated = "My account";
+
         @Test
         public void testLogin(){
             //Instanciando e iniciando a classe
@@ -26,22 +32,12 @@ public class SetupTest extends Base{
             LoginPage login = new LoginPage();
 
             home.clickBtnLogin();
-            System.out.println("Click Sign In e direcionou para a página de login");
             assertTrue(Browser.getCurrentDriver().getCurrentUrl().contains(utils.getBaseUrl().concat("/index.php?controller=authentication&back=my-account")));
 
-
             login.fillEmail();
-            System.out.println("Preencheu o email");
-
             login.fillPassword();
-            System.out.println("Preencheu a senha");
-
             login.clickBtnSubmitLogin();
-            System.out.println("Click no button Sign In!!");
             assertTrue(Browser.getCurrentDriver().getCurrentUrl().contains(utils.getBaseUrl().concat("/index.php?controller=my-account")));
-            System.out.println("Validou URL da conta");
-            System.out.println("Validou a conta no site");
-
         }
 
         @Test
@@ -78,7 +74,7 @@ public class SetupTest extends Base{
             category.clickProductAddToProductPage();
 
             //Verificar se produto está na página de detalhes correta
-           assertTrue(product.getProductNamePDP().equals(nameProductCategory));
+            assertTrue(product.getProductNamePDP().equals(nameProductCategory));
         }
 
         @Test
@@ -87,13 +83,65 @@ public class SetupTest extends Base{
             testeAddProductToProductPage();
             //iniciar as páginas
             ProductPage product = new ProductPage();
+
             //vou usar para válidar o nome no carrinho
             String nomeProductPDP = product.getProductNamePDP();
 
+            //clicar no botão de adicionar ao carrinho
+            product.clickBtnAddToCart();
 
-
+            //Clicar no botão proceed do checkout
+            product.clickBtnProceedToCheckout();
         }
 
+    @Test
+
+    public void testCreateAnAccount() {
+        HomePage index = new HomePage();
+        LoginPage authentication = new LoginPage();
+        CreateAnAccountPage createAccount = new CreateAnAccountPage();
+
+        index.clickBtnLogin();
+
+        //Verificação: fui redirecionada para a página "Authentication"?
+        assertTrue(Browser.getCurrentDriver().getCurrentUrl().contains(utils.getBaseUrl().concat("/index.php?controller=authentication&back=my-account")));
+
+        //Digita um e-mail válido e clica no botão "Create an account"
+        authentication.enterEmailAddress(emailValue);
+
+        //Validação: estou na página de "Create an account"?
+        assertTrue(createAccount.getTextpageSubHeading().equals(textCreateAnAccount.toUpperCase()));
+
+        //Preenchimento dos dados solicitados em YOUR PERSONAL INFORMATION
+        createAccount.personalInformation();
+
+        //Verificação: o email que digitei no input "id="email_create" é o mesmo do input id="email"?
+        assertTrue(createAccount.getEmailAccountValue().contains(emailValueAccount));
+
+        //Preenchimento dos dados solicitados em YOUR ADDRESS
+        createAccount.address();
+
+        //Verificações: os inputs de "fristname" e "lastname" condizem com os inputs  "customer_firstname" e "customer_lastname"?
+        assertThat(createAccount.getFirstNameAddressValue(), CoreMatchers.containsString(fristNameValue));
+        assertThat(createAccount.getLastNameAddressValue(), CoreMatchers.containsString(lastNameValue));
+
+        //Registrar
+        createAccount.clickSubmitBtnRegister();
     }
+
+    @Test
+
+    public void verificationsAccountCreated() {
+        testCreateAnAccount();
+
+        MyAccountPage accountPage = new MyAccountPage();
+
+        //Verificações para validar se a conta foi criada e fui redirecionada para "My account"
+        assertTrue(accountPage.getPageHeadingMyAccount().equals(accountCreated.toUpperCase()));
+        assertTrue(accountPage.MyPersonalInformation().equals(fullName));
+        assertThat(accountPage.navegationAccount(), CoreMatchers.containsString(accountCreated));
+    }
+}
+
 
 
