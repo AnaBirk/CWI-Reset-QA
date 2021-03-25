@@ -1,5 +1,7 @@
 package tests;
 
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.Test;
@@ -9,8 +11,11 @@ import utils.utils;
 
 import static org.junit.Assert.*;
 
-public class SetupTest extends Base{
 
+@Feature("Testes site de ecommerce")
+public class SetupTest extends Base{
+        @Test
+        @Story("Abrir o site")
         public void testOpeningBrowserAndLoadPage(){
             assertTrue(Browser.getCurrentDriver().getCurrentUrl().contains(utils.getBaseUrl()));
             System.out.println("Funcionou!");
@@ -26,6 +31,7 @@ public class SetupTest extends Base{
         String accountCreated = "My account";
 
         @Test
+        @Story("Realizar o login")
         public void testLogin(){
             //Instanciando e iniciando a classe
             HomePage home = new HomePage();

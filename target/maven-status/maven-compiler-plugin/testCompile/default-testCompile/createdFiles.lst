@@ -4,7 +4,9 @@ elementMapper\CartPageElementMapper.class
 elementMapper\ProductPageElementMapper.class
 pageObjects\HomePage.class
 pageObjects\MyAccountPage.class
+elementMapper\CreateAnAccountPageElementMapper.class
 pageObjects\ProductPage.class
+pageObjects\CreateAnAccountPage.class
 elementMapper\MyAccountPageElementMapper.class
 tests\Base.class
 elementMapper\HomePageElementMapper.class

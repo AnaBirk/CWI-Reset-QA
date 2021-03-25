@@ -1,10 +1,16 @@
 package utils;
 
+import com.fasterxml.jackson.databind.util.ByteBufferBackedInputStream;
+import io.qameta.allure.Allure;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
@@ -44,6 +50,14 @@ public class Browser {
     //
     public static void loadPage(String url) {
         getCurrentDriver().get(url);
+    }
+
+    public static void print(){
+        //Tira o print
+        byte[] screenshooByts = (((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES));
+        InputStream screenshootStream = new ByteArrayInputStream(screenshooByts);
+        Allure.addAttachment("Screenshoot test: ",screenshootStream);
+
     }
 }
 

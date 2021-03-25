@@ -18,6 +18,7 @@ public class Base {
 
     @After
     public void tearDown(){
+        Browser.print();
         Browser.close();
     }
 }
