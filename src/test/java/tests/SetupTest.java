@@ -3,12 +3,10 @@ package tests;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import org.hamcrest.CoreMatchers;
-import org.junit.Assert;
 import org.junit.Test;
 import pageObjects.*;
 import utils.Browser;
 import utils.utils;
-
 import static org.junit.Assert.*;
 
 
@@ -25,7 +23,7 @@ public class SetupTest extends Base{
         String fristNameValue = "Ana Caroline";
         String lastNameValue = "Birk";
         String fullName = fristNameValue.concat(" " + lastNameValue);
-        String emailValue = "anabirkkkkktestefinal@gmail.com";
+        String emailValue = "christian1carlos@gmail.com";
         String emailValueAccount = emailValue;
         String textCreateAnAccount = "Create an account";
         String accountCreated = "My account";
