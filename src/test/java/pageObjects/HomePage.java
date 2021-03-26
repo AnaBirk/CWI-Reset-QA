@@ -30,6 +30,7 @@ public class HomePage extends HomePageElementMapper {
         submit_search.click();
     }
 
+    @Step("Pesquisar um produto (clicar no input, digitar e clicar no icone de pesquisar)")
     public void doSearch(String quest){
         click_search_query_top();
         sendKeysSearch_query_top(quest);

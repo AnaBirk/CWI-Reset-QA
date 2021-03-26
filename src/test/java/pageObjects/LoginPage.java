@@ -19,6 +19,7 @@ public class LoginPage extends LoginPageElementMapper {
         submitCreate.click();
     }
 
+    @Step("Preencheu o email para criar uma conta")
     public void enterEmailAddress(String emailValue){
         fillEmailCreateAnAccount(emailValue);
         clickSubmitCreateAnAccount();
@@ -26,9 +27,7 @@ public class LoginPage extends LoginPageElementMapper {
 
     //Login
     @Step("Preencheu o email")
-    public void fillEmail(){
-        email.sendKeys("anabirk.ev@gmail.com");
-    }
+    public void fillEmail(){email.sendKeys("anabirk.ev@gmail.com");}
 
     @Step("Preencheu a senha")
     public void fillPassword(){

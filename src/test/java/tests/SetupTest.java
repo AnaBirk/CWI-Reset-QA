@@ -19,14 +19,6 @@ public class SetupTest extends Base{
             System.out.println("Funcionou!");
         }
 
-        //Variáveis Utilizadas nos testes
-        String fristNameValue = "Ana Caroline";
-        String lastNameValue = "Birk";
-        String fullName = fristNameValue.concat(" " + lastNameValue);
-        String emailValue = "christian1carlos@gmail.com";
-        String emailValueAccount = emailValue;
-        String textCreateAnAccount = "Create an account";
-        String accountCreated = "My account";
 
         @Test
         @Story("Realizar o login")
@@ -45,13 +37,15 @@ public class SetupTest extends Base{
         }
 
         @Test
+        @Story("Pesquisar Adress na barra de pesquisa")
          public void testeSearch(){
 
-            String quest = "DRESS";
-            String questResultQtd = "7 results have been found.";
             //iniciar as páginas
             HomePage home = new HomePage();
             SearchPage search = new SearchPage();
+
+            String quest = "DRESS";
+            String questResultQtd = "7 results have been found.";
 
             //Fazer a pesquisa
             home.doSearch(quest);
@@ -64,6 +58,7 @@ public class SetupTest extends Base{
         }
 
         @Test
+        @Story("Abrir página de produto PDP")
          public void testeAddProductToProductPage(){
             //Acessar a categoria dress
             testeSearch();
@@ -71,6 +66,7 @@ public class SetupTest extends Base{
             //Iniciar as páginas
             SearchPage category = new SearchPage();
             ProductPage product = new ProductPage();
+
             //salva o nome do produto na página de search
             String nameProductCategory = category.getProductNameCategory();
 
@@ -82,6 +78,7 @@ public class SetupTest extends Base{
         }
 
         @Test
+        @Story("Adicionar produto ao carrinho")
          public void testeAddProductToCart(){
             //acessar a página de produto
             testeAddProductToProductPage();
@@ -99,11 +96,20 @@ public class SetupTest extends Base{
         }
 
     @Test
-
+    @Story("Criar uma conta")
     public void testCreateAnAccount() {
         HomePage index = new HomePage();
         LoginPage authentication = new LoginPage();
         CreateAnAccountPage createAccount = new CreateAnAccountPage();
+        MyAccountPage accountPage = new MyAccountPage();
+
+        String fristNameValue = "Ana Caroline";
+        String lastNameValue = "Birk";
+        String fullName = fristNameValue.concat(" " + lastNameValue);
+        String emailValue = "birk01@gmail.com";
+        String emailValueAccount = emailValue;
+        String textCreateAnAccount = "Create an account";
+        String accountCreated = "My account";
 
         index.clickBtnLogin();
 
@@ -131,20 +137,13 @@ public class SetupTest extends Base{
 
         //Registrar
         createAccount.clickSubmitBtnRegister();
-    }
-
-    @Test
-
-    public void verificationsAccountCreated() {
-        testCreateAnAccount();
-
-        MyAccountPage accountPage = new MyAccountPage();
 
         //Verificações para validar se a conta foi criada e fui redirecionada para "My account"
         assertTrue(accountPage.getPageHeadingMyAccount().equals(accountCreated.toUpperCase()));
         assertTrue(accountPage.MyPersonalInformation().equals(fullName));
         assertThat(accountPage.navegationAccount(), CoreMatchers.containsString(accountCreated));
     }
+
 }
 
 

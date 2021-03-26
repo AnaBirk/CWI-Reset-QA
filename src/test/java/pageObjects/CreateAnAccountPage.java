@@ -1,6 +1,7 @@
 package pageObjects;
 
 import elementMapper.CreateAnAccountPageElementMapper;
+import io.qameta.allure.Step;
 import org.openqa.selenium.support.PageFactory;
 import utils.Browser;
 import utils.utils;
@@ -103,6 +104,7 @@ public class CreateAnAccountPage extends CreateAnAccountPageElementMapper {
         btnRegister.click();
     }
 
+    @Step("Preencheu todas as informações pessoais")
     public void personalInformation(){
         selectMrTitle();
         fillFristName();
@@ -112,6 +114,7 @@ public class CreateAnAccountPage extends CreateAnAccountPageElementMapper {
         checkbox();
     }
 
+    @Step("Preencheu todas as informações de endereço e telefones")
     public void address(){
         fillCompany();
         fillAddress();
