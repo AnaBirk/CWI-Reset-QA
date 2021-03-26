@@ -5,7 +5,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class ProductPageElementMapper {
 
-    @FindBy(xpath = "/html/body/div/div[2]/div/div[4]/div/div/div/div[3]/h1")
+    @FindBy(css = ".primary_block .pb-center-column h1")
     public WebElement productName;
 
     @FindBy(css = "#add_to_cart > button")

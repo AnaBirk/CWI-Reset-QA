@@ -14,6 +14,9 @@ public class MyAccountPageElementMapper {
     @FindBy(className="navigation_page")
     public WebElement myAccountNavigation;
 
+    @FindBy(xpath = "//*[@id=\"header_logo\"]/a")
+    public WebElement logoPage;
+
 
 
 }

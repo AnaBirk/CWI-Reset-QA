@@ -4,9 +4,13 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import org.hamcrest.CoreMatchers;
 import org.junit.Test;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import pageObjects.*;
 import utils.Browser;
 import utils.utils;
+
+import java.util.Objects;
+
 import static org.junit.Assert.*;
 
 
@@ -45,7 +49,7 @@ public class SetupTest extends Base{
             SearchPage search = new SearchPage();
 
             String quest = "DRESS";
-            String questResultQtd = "7 results have been found.";
+            String questResultQtd = "7";
 
             //Fazer a pesquisa
             home.doSearch(quest);
@@ -70,7 +74,7 @@ public class SetupTest extends Base{
             //salva o nome do produto na página de search
             String nameProductCategory = category.getProductNameCategory();
 
-            //Click em More e direcionar a direcionar para a página de produto
+            //Click em More e direcionar para a página de produto
             category.clickProductAddToProductPage();
 
             //Verificar se produto está na página de detalhes correta
@@ -84,6 +88,7 @@ public class SetupTest extends Base{
             testeAddProductToProductPage();
             //iniciar as páginas
             ProductPage product = new ProductPage();
+            CartPage cart = new CartPage();
 
             //vou usar para válidar o nome no carrinho
             String nomeProductPDP = product.getProductNamePDP();
@@ -93,7 +98,73 @@ public class SetupTest extends Base{
 
             //Clicar no botão proceed do checkout
             product.clickBtnProceedToCheckout();
+
+            //Validações
+            //Nome do produto
+            assertTrue(cart.getNameProductCart().equals(nomeProductPDP));
         }
+        @Test
+        @Story("Fazer a compra dos produtos que estão no carrinho")
+        public void testeCheckout() {
+
+            LoginPage login = new LoginPage();
+            HomePage home = new HomePage();
+            MyAccountPage account = new MyAccountPage();
+            CartPage cart = new CartPage();
+            CartAddressPage address = new CartAddressPage();
+            CartShippingPage shipping = new CartShippingPage();
+            CartPaymentPage payment = new CartPaymentPage();
+
+            String addressNavText = "Addresses";
+            String shippingNameCartText = "Shipping";
+            String paymentCartText = "Your payment method";
+            String bankWireText = "ORDER SUMMARY";
+            //String confirmPrice = payment.getValueFinalPrice();
+
+            home.clickBtnLogin();
+            assertTrue(Browser.getCurrentDriver().getCurrentUrl().contains(utils.getBaseUrl().concat("/index.php?controller=authentication&back=my-account")));
+
+            testLogin();
+            account.clickLogoPage();
+
+            testeAddProductToCart();
+
+            //Clicar no botão Proceed to checkout
+            cart.clickBtnProceedToCheckoutCart();
+
+            //Validar se está na parte de address
+           assertTrue(address.getTextAddressNameCart().equals(addressNavText));
+
+            //clicar no  botão de Proceed to checkout
+            address.clickBtnprocessAddress();
+
+            //Validar se está na parte de Shipping
+            assertTrue(shipping.getTextShippingNameCart().equals(shippingNameCartText));
+
+            //clicar em I agree to the terms of service and will adhere to them unconditionally. (Read the Terms of Service)
+            shipping.clickCheckboxTermsOfServiceCart();
+
+            //clicar no  botão de Proceed to checkout
+            shipping.clickBtnProcessCarrierCart();
+
+            //validar se está na página de  > Your payment method
+            assertTrue(payment.getTextYourPaymentNameCart().equals(paymentCartText));
+
+            //clicar em pay by bank wire
+            payment.clickPayByBankCart();
+
+            //validar a página
+            assertTrue(payment.getTextBankWireNameCart().equals(bankWireText));
+
+            //clicar no botão i confirm my ordem
+            payment.clickBtnIConfirmMyOrder();
+
+            //Confirmar ordem
+
+            //assertTrue(payment.getValueConfirmFinalPrice().equals(confirmPrice));
+        }
+
+
 
     @Test
     @Story("Criar uma conta")
@@ -106,7 +177,7 @@ public class SetupTest extends Base{
         String fristNameValue = "Ana Caroline";
         String lastNameValue = "Birk";
         String fullName = fristNameValue.concat(" " + lastNameValue);
-        String emailValue = "birk01@gmail.com";
+        String emailValue = "birk8s01@gmail.com";
         String emailValueAccount = emailValue;
         String textCreateAnAccount = "Create an account";
         String accountCreated = "My account";
@@ -118,6 +189,7 @@ public class SetupTest extends Base{
 
         //Digita um e-mail válido e clica no botão "Create an account"
         authentication.enterEmailAddress(emailValue);
+
 
         //Validação: estou na página de "Create an account"?
         assertTrue(createAccount.getTextpageSubHeading().equals(textCreateAnAccount.toUpperCase()));

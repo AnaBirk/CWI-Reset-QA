@@ -21,5 +21,9 @@ public class MyAccountPage extends MyAccountPageElementMapper {
         return myAccountNavigation.getText();
     }
 
+    public void clickLogoPage(){
+        logoPage.click();
+    }
+
 }
 

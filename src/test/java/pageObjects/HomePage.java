@@ -12,7 +12,7 @@ public class HomePage extends HomePageElementMapper {
         PageFactory.initElements(Browser.getCurrentDriver(), this);
     }
 
-    @Step("Clicar botão login e direcionou para a página de login")
+    @Step("Clicou no botão 'login' e direcionou para a página de login")
 
     public void clickBtnLogin(){
         login.click();

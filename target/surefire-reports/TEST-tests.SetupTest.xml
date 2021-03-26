@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="tests.SetupTest" time="85.959" tests="6" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="tests.SetupTest" time="112.401" tests="7" errors="0" skipped="0" failures="0">
   <properties>
     <property name="idea.version" value="2020.3.3"/>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
@@ -63,10 +63,11 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase name="testCreateAnAccount" classname="tests.SetupTest" time="17.566"/>
-  <testcase name="testLogin" classname="tests.SetupTest" time="12.717"/>
-  <testcase name="testeAddProductToProductPage" classname="tests.SetupTest" time="14.638"/>
-  <testcase name="testeSearch" classname="tests.SetupTest" time="11.694"/>
-  <testcase name="testOpeningBrowserAndLoadPage" classname="tests.SetupTest" time="10.289"/>
-  <testcase name="testeAddProductToCart" classname="tests.SetupTest" time="18.74"/>
+  <testcase name="testCreateAnAccount" classname="tests.SetupTest" time="18.315"/>
+  <testcase name="testeCheckout" classname="tests.SetupTest" time="29.462"/>
+  <testcase name="testLogin" classname="tests.SetupTest" time="12.33"/>
+  <testcase name="testeAddProductToProductPage" classname="tests.SetupTest" time="14.316"/>
+  <testcase name="testeSearch" classname="tests.SetupTest" time="9.89"/>
+  <testcase name="testOpeningBrowserAndLoadPage" classname="tests.SetupTest" time="8.156"/>
+  <testcase name="testeAddProductToCart" classname="tests.SetupTest" time="19.642"/>
 </testsuite>
